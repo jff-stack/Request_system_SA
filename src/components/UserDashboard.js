@@ -16,17 +16,58 @@ import {
 const RequestForm = ({ onSubmit }) => {
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('General');
-  const [image, setImage] = useState(null);
   const [description, setDescription] = useState('');
+  const [imageFile, setImageFile] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleFileChange = (e) => {
+    // Store the raw file in state
+    const file = e.target.files[0];
+    if (file) {
+      setImageFile(file);
+    } else {
+      setImageFile(null);
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const request = { title, category, image, description};
-    onSubmit(request);
+    
+    // If an image was selected, convert it to base64
+    if (imageFile) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const newRequest = {
+          title,
+          category,
+          description,
+          // Store both the base64 string & original filename
+          image: {
+            name: imageFile.name,
+            data: reader.result, // Base64 data
+          },
+        };
+        onSubmit(newRequest);
+        resetForm();
+      };
+      reader.readAsDataURL(imageFile);
+    } else {
+      // If no image, just pass null for `image`
+      const newRequest = {
+        title,
+        category,
+        description,
+        image: null,
+      };
+      onSubmit(newRequest);
+      resetForm();
+    }
+  };
+
+  const resetForm = () => {
     setTitle('');
     setCategory('General');
-    setImage(null);
     setDescription('');
+    setImageFile(null);
   };
 
   return (
@@ -38,7 +79,7 @@ const RequestForm = ({ onSubmit }) => {
             <Form.Label>Request Title</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter request description"
+              placeholder="Enter request title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
@@ -48,12 +89,11 @@ const RequestForm = ({ onSubmit }) => {
           <Form.Group className="mb-3">
             <Form.Label>Description</Form.Label>
             <Form.Control
-            //size="sm"
-            as="textarea"
-            rows={4}
-            placeholder="Enter Description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+              as="textarea"
+              rows={4}
+              placeholder="Enter Description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </Form.Group>
 
@@ -63,7 +103,6 @@ const RequestForm = ({ onSubmit }) => {
               value={category}
               onChange={(e) => setCategory(e.target.value)}
             >
-              <option value="">Select Category</option>
               <option value="Merge">Merge</option>
               <option value="Target-Change">Target Change</option>
               <option value="General">General</option>
@@ -76,7 +115,7 @@ const RequestForm = ({ onSubmit }) => {
             <Form.Control
               type="file"
               accept="image/*"
-              onChange={(e) => setImage(e.target.files[0])}
+              onChange={handleFileChange}
             />
           </Form.Group>
 
@@ -88,6 +127,7 @@ const RequestForm = ({ onSubmit }) => {
     </Card>
   );
 };
+
 
 const UserDashboard = () => {
     const [requests, setRequests] = useState([]);

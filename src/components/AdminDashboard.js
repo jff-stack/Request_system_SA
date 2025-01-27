@@ -41,9 +41,19 @@ const AdminDashboard = () => {
     setRequests(updatedRequests.filter(req => !req.deletedByAdmin));
   };
 
-  const filteredRequests = selectedCategory === 'All'
-    ? requests
-    : requests.filter(req => req.category === selectedCategory);
+  // Helper to trigger a download from a base64 Data URL
+  const handleDownload = (image) => {
+    if (!image || !image.data) return;
+    const link = document.createElement('a');
+    link.href = image.data;       // base64 string
+    link.download = image.name;   // original filename
+    link.click();
+  };
+
+  const filteredRequests = 
+    selectedCategory === 'All'
+      ? requests
+      : requests.filter(req => req.category === selectedCategory);
 
   return (
     <Container className="mt-4">
@@ -79,8 +89,9 @@ const AdminDashboard = () => {
                 <th>Date</th>
                 <th>Status</th>
                 <th>Description</th>
+                {/* New column for Image */}
+                <th>Image</th>
                 <th>Actions</th>
-                
               </tr>
             </thead>
             <tbody>
@@ -97,8 +108,23 @@ const AdminDashboard = () => {
                       {req.status}
                     </Badge>
                   </td>
+                  <td>{req.description}</td>
 
-                  <td> {req.description} </td>
+                  {/* Image column with optional Download button */}
+                  <td>
+                    {req.image ? (
+                      <Button
+                        variant="outline-info"
+                        size="sm"
+                        onClick={() => handleDownload(req.image)}
+                      >
+                        Download Image
+                      </Button>
+                    ) : (
+                      <span className="text-muted">No Image</span>
+                    )}
+                  </td>
+
                   <td>
                     <div className="d-flex gap-2">
                       <Button
