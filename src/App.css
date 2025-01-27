@@ -1,0 +1,329 @@
+/* General Styles 
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-container form {
+  width: 100%;
+}
+
+.login-container input,
+.login-container select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.login-container button:hover {
+  background-color: #218838;
+}
+
+.user-dashboard {
+  width: 100%;
+  margin: 20px auto;
+}
+
+.request-form {
+  margin-bottom: 20px;
+}
+
+.request-form input,
+.request-form select,
+.request-form button {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.request-form button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.request-form button:hover {
+  background-color: #0056b3;
+}
+
+.request-list {
+  margin-top: 20px;
+}
+
+.request-list div {
+  background-color: #f8f9fa;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+
+.admin-dashboard {
+  width: 100%;
+  margin: 20px auto;
+}
+
+.admin-dashboard table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.admin-dashboard th,
+.admin-dashboard td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.admin-dashboard th {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.admin-dashboard tr:hover {
+  background-color: #f1f1f1;
+}
+
+.admin-dashboard button {
+  padding: 8px 12px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.admin-dashboard button:hover {
+  background-color: #218838;
+}
+
+*/
+
+/* Reset & Base Styles */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box; /* Makes layout calculations easier */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: #f8f9fa; /* Light neutral background */
+  color: #333; /* Text color */
+}
+
+/* Apply border-box to all elements */
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+#root,
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+}
+
+.container {
+  margin: auto; /* Center horizontally and vertically within .wrapper */
+  width: 100%;
+  max-width: 600px; /* A comfortable max width for forms, etc. */
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Headings */
+h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+/* 
+  Login Page Styles 
+  Using .login-container but everything inside .container is 
+  already centered horizontally by default. 
+*/
+.login-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Let the container do the max-width constraint */
+}
+
+.login-container form {
+  width: 100%;
+}
+
+/* Inputs, selects, etc. */
+.login-container input,
+.login-container select {
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border: 1px solid #dcdcdc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+/* Primary button style */
+.login-container button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #007bff; /* Modern blue shade */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.login-container button:hover {
+  background-color: #0056b3;
+}
+
+/* 
+  User Dashboard 
+  - Widen the container to 100%, but rely on .container or .wrapper 
+    for overall layout. 
+*/
+.user-dashboard {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+/* Request Form */
+.request-form {
+  margin-bottom: 1rem;
+}
+
+.request-form input,
+.request-form select,
+.request-form button {
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border: 1px solid #dcdcdc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.request-form button {
+  background-color: #28a745; /* Green action color */
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.request-form button:hover {
+  background-color: #218838;
+}
+
+/* List of requests */
+.request-list {
+  margin-top: 1rem;
+}
+
+.request-list div {
+  background-color: #fefefe;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border: 1px solid #eee;
+  border-radius: 4px;
+}
+
+/* Admin Dashboard */
+.admin-dashboard {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.admin-dashboard table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: #fff;
+}
+
+/* Table cells and header */
+.admin-dashboard th,
+.admin-dashboard td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  vertical-align: middle;
+}
+
+/* Table header color */
+.admin-dashboard th {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.admin-dashboard tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Admin dashboard button */
+.admin-dashboard button {
+  padding: 0.5rem 1rem;
+  background-color: #28a745; /* Matches request-form button */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.admin-dashboard button:hover {
+  background-color: #218838;
+}
